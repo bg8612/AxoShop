@@ -1,0 +1,545 @@
+@font-face {
+  font-family: "SF-Pro-Display-Bold";
+  src: url("/assets/fonts/SFProDisplay-Bold.woff2");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "SF-Pro-Display-Semibold";
+  src: url("/assets/fonts/SFProDisplay-Semibold.woff2");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "SF-Pro-Display-Regular";
+  src: url("/assets/fonts/SFProDisplay-Regular.woff2");
+  font-display: swap;
+}
+
+
+
+/* Настройка страницы */
+body {
+    background-color: #F6F6F6;
+}
+.content-area {
+    max-width: 1400px;
+    margin: auto;
+    width: calc(100% - 30px);
+}
+
+/* Навигационное меню */
+
+header {
+    padding-top: 15px;
+    padding-bottom: 60px;
+}
+
+header nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+header nav ul {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+header nav ul li a {
+   font-family: "SF-Pro-Display-Semibold", sans-serif;
+   color: #000;   
+}
+
+.search {
+    max-width: 540px;
+    width: 100%;;
+    height: 33px;
+}
+
+.search input {
+    background-color: #ECECEC;
+    max-width: 540px;
+    width: 100%;;
+    height: 33px;
+    display: flex;
+    align-items: center;
+    border-radius: 22px;
+    padding: 9px  15px;
+    font-family: "SF-Pro-Display-Regular", sans-serif;
+}
+
+.search input:focus {
+     outline: none;
+}
+
+.search input::placeholder {
+    font-family: "SF-Pro-Display-Regular", sans-serif;
+}
+
+.brand, .usertools {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.usertools {
+  gap: 15px;  
+}
+
+#authorization {
+   font-family: "SF-Pro-Display-Semibold", sans-serif;
+   color: #ffffff; 
+   padding: 8.5px 20px;
+   background-color: #000;
+   border-radius: 15px; 
+}
+
+.header-logo {
+    display: none;
+}
+
+/* --- АДАПТИВНОЕ МЕНЮ --- */
+
+.mobile-bottom-nav {
+    display: none; /* Скрыто на ПК */
+}
+
+@media (max-width: 1130px) {
+    /* Настройка шапки: оставляем только лого */
+    header {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        padding-bottom: 20px;
+    }
+    
+    .header-logo {
+        display: block;
+        max-width: 120px;
+    }
+
+    /* Скрываем всё лишнее из хедера */
+    header nav { display: none; }
+
+    /* Отступ снизу страницы, чтобы контент не перекрывался менюшкой */
+    body {
+        padding-bottom: 100px; 
+    }
+
+    /* Само плавающее меню */
+    .mobile-bottom-nav {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 1000;
+        
+        width: 90%; /* Ширина плашки */
+        max-width: 350px;
+        height: 65px;
+        
+        background: #fff; /* Почти черный, полупрозрачный */
+        backdrop-filter: blur(10px); /* Эффект матового стекла (iOS style) */
+        -webkit-backdrop-filter: blur(10px);
+        
+        border-radius: 35px; /* Pill shape */
+        box-shadow: 0 10px 25px rgba(214, 214, 214, 0.3);
+        border: #ECECEC 1.5px solid;
+        padding-bottom: env(safe-area-inset-bottom); 
+    }
+
+    .nav-item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex: 1;
+        height: 100%;
+        border-radius: 0;
+        transition: 0.2s all;
+        opacity: 0.7; /* Легкая прозрачность для неактивных */
+        position: relative;
+    }
+
+    .nav-item:not(:last-child)::after {
+        content: "";
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        height: 24px;
+        width: 1px;
+        background-color: #ECECEC;
+    }
+
+    /* Активное состояние (можно добавлять класс JS-ом) */
+    .nav-item.active {
+        background: none;
+        opacity: 1;
+    }
+
+    .nav-item:active {
+        transform: scale(0.9);
+    }
+}
+
+ /* Пополнение Стим */
+
+.steam {
+    background-color: #fff;
+    padding: 25px; /* Чуть больше воздуха */
+    border-radius: 20px; /* Более современное скругление */
+    width: 100%;
+    max-width: 100%; /* Ограничитель для больших экранов */
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05); /* Легкая тень для объема */
+}
+
+.steam h1 {
+    font-family: "SF-Pro-Display-Bold", sans-serif;
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+.drop-down-lists {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+    align-items: flex-end; /* Выравнивание элементов по низу */
+}
+
+.input-group {
+    position: relative;
+    width: 100%;
+    flex: 1; /* Равномерное распределение места на десктопе */
+}
+
+.input-label {
+    position: absolute;
+    top: 10px;
+    left: 14px; /* Синхронизировано с padding input */
+    font-size: 11px; /* Чуть читабельнее */
+    color: #A9A9A9;
+    font-family: "SF-Pro-Display-Semibold", sans-serif;
+    pointer-events: none;
+    line-height: 1;
+    z-index: 5;
+    transition: 0.2s;
+}
+
+/* Общие стили для инпутов и селектов */
+.drop-down-lists input,
+.drop-down-lists select {
+    width: 100%;
+    background-color: #fff;
+    border: 2px solid #ECECEC;
+    border-radius: 12px; /* Синхронизировано с кнопкой */
+    font-family: "SF-Pro-Display-Semibold", sans-serif;
+    font-size: 16px; /* 16px предотвращает зум на iOS */
+    outline: none;
+    height: 54px; /* Фиксированная высота для всех полей */
+    transition: border-color 0.2s;
+    appearance: none; /* Убираем нативные стили браузера */
+}
+
+.drop-down-lists input {
+    padding: 22px 14px 8px 14px; /* Отступы под плавающий лейбл */
+}
+
+.drop-down-lists select {
+    padding: 22px 40px 8px 14px;
+    cursor: pointer;
+    /* Оставлена только одна картинка (последняя из твоего кода), чтобы избежать конфликта */
+    background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%23ECECEC' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+}
+
+.drop-down-lists input:focus,
+.drop-down-lists select:focus {
+    border-color: #000; /* Акцент при фокусе */
+}
+
+.drop-down-lists input::placeholder {
+    font-family: "SF-Pro-Display-Semibold", sans-serif;
+    font-size: 16px;
+    color: #C9C9C9; /* Цвет плейсхолдера как текста, так как это значение */
+}
+
+.drop-down-lists button {
+    height: 54px; /* Строго равна высоте инпутов */
+    width: 100%;
+    max-width: 200px;
+    background-color: #000;
+    border-radius: 12px;
+    cursor: pointer;
+    border: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    color: #fff;
+    font-family: "SF-Pro-Display-Semibold", sans-serif;
+    font-size: 16px;
+    transition: 0.2s all;
+    flex-shrink: 0; /* Запрещаем кнопке сжиматься */
+}
+
+.drop-down-lists button:hover {
+    opacity: 0.9;
+    transform: scale(1.02);
+}
+
+.drop-down-lists button:active {
+    transform: scale(0.98);
+}
+
+
+/* MOBILE ADAPTATION */
+
+
+@media (max-width: 900px) {
+    .drop-down-lists {
+        flex-wrap: wrap; /* Разрешаем перенос для планшетов */
+    }
+    
+    /* На планшете кнопка и валюта могут быть меньше */
+    .input-group {
+        min-width: 45%; 
+    }
+}
+
+@media (max-width: 600px) {
+    .steam {
+        padding: 20px 15px; /* Уменьшаем отступы контейнера на мобильных */
+    }
+
+    .drop-down-lists {
+        flex-direction: column; /* Вертикальный стек */
+        gap: 12px; /* Чуть плотнее */
+        width: 100%;
+    }
+
+    .input-group {
+        width: 100%; /* Полная ширина */
+        min-width: 100%;
+    }
+
+    .drop-down-lists button {
+        max-width: 100%; /* Кнопка на всю ширину экрана */
+        margin-top: 10px; /* Визуально отделяем кнопку действия */
+    }
+
+    /* Отключаем ховер эффекты на тач-устройствах, чтобы кнопка не "залипала" */
+    .drop-down-lists button:hover {
+        transform: none;
+        opacity: 1;
+    }
+    
+    /* Оставляем только эффект нажатия */
+    .drop-down-lists button:active {
+        opacity: 0.8;
+        transform: scale(0.98);
+    }
+
+    .mobile-bottom-nav {
+        width: 100%;
+        height: 70px;
+        max-width: 100%;
+        bottom: 0;
+        left: 0;
+        transform: none;
+        border-radius: 0;
+    }
+}
+
+/* Для тебя */
+
+/* --- СЕКЦИЯ ПРОДУКТОВ (GRID) --- */
+.products-section {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 25px;
+}
+
+.section-header h2 {
+    font-family: "SF-Pro-Display-Bold", sans-serif;
+    font-size: 32px;
+    color: #000;
+    line-height: 1;
+}
+
+.section-header h2 span {
+    display: block; /* Перенос подзаголовка на новую строку как в макете */
+    font-family: "SF-Pro-Display-Regular", sans-serif;
+    font-size: 14px;
+    color: #A9A9A9;
+    margin-top: 5px;
+    margin-left: 2px;
+}
+
+.show-all {
+    font-family: "SF-Pro-Display-Semibold", sans-serif;
+    font-size: 14px;
+    color: #000;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+/* Сетка товаров */
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(216px, 1fr));
+    gap: 20px;
+}
+
+/* --- КАРТОЧКА ТОВАРА (310px x 216px) --- */
+.product-card {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    text-decoration: none;
+    color: #000;
+    transition: transform 0.2s ease;
+    /* Чтобы не ломалась верстка при переполнении */
+    overflow: hidden; 
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Верхняя часть с картинкой (216x216) */
+.card-image-wrapper {
+    position: relative;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    border-radius: 20px;
+    overflow: hidden;
+    background-color: #ECECEC; /* Цвет плейсхолдера, если картинки нет */
+}
+
+.card-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Бейджи поверх картинки */
+.card-label {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: #fff;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-family: "SF-Pro-Display-Bold", sans-serif;
+    font-size: 10px;
+    text-transform: lowercase;
+    z-index: 2;
+}
+
+.card-fav {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 32px;
+    height: 32px;
+    background: #fff;
+    border-radius: 10px; /* Скругленный квадрат */
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 2;
+    transition: 0.2s;
+}
+
+.card-fav:hover {
+    transform: scale(1.1);
+}
+
+/* Нижняя часть с инфо */
+.card-info {
+    padding-top: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.card-price {
+    font-family: "SF-Pro-Display-Bold", sans-serif;
+    font-size: 20px;
+    color: #000;
+}
+
+.card-title {
+    font-family: "SF-Pro-Display-Semibold", sans-serif;
+    font-size: 13px; /* Чуть меньше для длинных названий */
+    line-height: 1.3;
+    color: #000;
+    /* Ограничение в 2 строки */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    height: 34px; /* Фикс высоты для выравнивания */
+}
+
+.card-rating {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: auto; /* Прижать к низу блока info, если есть место */
+    font-family: "SF-Pro-Display-Semibold", sans-serif;
+    font-size: 12px;
+}
+
+.rating-value {
+    color: #000;
+}
+
+.rating-count {
+    color: #A9A9A9;
+    font-family: "SF-Pro-Display-Regular", sans-serif;
+}
+
+/* --- МОБИЛЬНАЯ АДАПТАЦИЯ КАРТОЧЕК --- */
+@media (max-width: 600px) {
+    .products-grid {
+        /* На мобильном - 2 колонки, карточки чуть уже (160px+), растягиваются */
+        grid-template-columns: repeat(2, 1fr); 
+        gap: 10px; /* Меньше отступ */
+    }
+
+    .product-card {
+        max-width: 100%; /* Разрешаем сжиматься */
+        height: auto; /* Высота подстраивается */
+        min-height: 280px;
+    }
+
+    .card-image-wrapper {
+        height: auto;
+        aspect-ratio: 1 / 1; /* Сохраняем квадратность картинки */
+    }
+    
+    .section-header h2 {
+        font-size: 24px;
+    }
+}
